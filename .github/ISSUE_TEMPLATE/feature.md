@@ -1,11 +1,11 @@
 ---
 name: Feature
-about: 요구사항을 표시합니다
+about: 새로운 기능
 title: ''
 labels: Feature
 assignees: yoonhe
 
 ---
 
-## 요구사항
+## TODO
 - [ ] 블라블라
