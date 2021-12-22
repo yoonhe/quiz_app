@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.16.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.0.3",
     "babel-jest": "^27.4.5",
     "babel-loader": "^8.2.3",
@@ -28,8 +29,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "given2": "^2.1.7",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.5",
+    "jest-plugin-context": "^2.7.0",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0"
