@@ -32,6 +32,8 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
+  font-size: 0;
+
   p {
     display: flex;
     align-items: center;
@@ -39,12 +41,9 @@ const Modal = styled.div`
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: conic-gradient(
-      ${COLORS.GREEN} 100deg,
-      #ededed 100deg 330deg
-    );
+    background: conic-gradient(${COLORS.GREEN} 100deg, #ededed 100deg 330deg);
     animation: ${spin} 1s linear infinite;
-    font-size: 0;
+
     &:after {
       display: block;
       width: 90%;
@@ -63,10 +62,7 @@ const Spinner = styled.p`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: conic-gradient(
-    ${COLORS.GREEN} 100deg,
-    #ededed 100deg 330deg
-  );
+  background: conic-gradient(${COLORS.GREEN} 100deg, #ededed 100deg 330deg);
   animation: ${spin} 1s linear infinite;
   &:after {
     display: block;
