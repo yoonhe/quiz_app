@@ -1,7 +1,5 @@
 import { css } from "@emotion/react";
 
-import COLORS from "../constants/color";
-
 const globalStyle = css`
   @import "css-wipe";
 
