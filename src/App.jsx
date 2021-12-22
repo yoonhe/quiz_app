@@ -1,33 +1,39 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "@emotion/styled";
 import { Global } from "@emotion/react";
 
-import getQuestionPagePath from "./utils/getQuestionPagePath";
-import setQuestions from "./utils/setQuestions";
-
 import globalStyle from "./style/globalStyle";
 
+import getQuestionPagePath from "./utils/getQuestionPagePath";
 import COLORS from "./constants/color";
 
-const App = () => {
-  let navigate = useNavigate();
+import useSetQuestion from "./hooks/useSetQuestion";
 
-  const handleClick = async () => {
-    await setQuestions();
+import LoadingModal from "./LoadingModal";
+
+const App = () => {
+  const navigate = useNavigate();
+
+  const { isLoading, isSuccess, handleSetQuestions } = useSetQuestion();
+
+  useEffect(() => {
+    if (!isSuccess) {
+      return;
+    }
 
     navigate(getQuestionPagePath({ page: 1 }));
-  };
+  }, [isSuccess]);
 
   return (
     <>
       <Global styles={globalStyle} />
+      {isLoading && <LoadingModal />}
       <Wrapper>
         <Text>지금부터 랜덤 퀴즈 풀이를 시작합니다</Text>
-        <Text>
-          준비가 되셨다면 아래의 버튼을 클릭해 주세요!
-        </Text>
-        <Button onClick={handleClick}>퀴즈 풀기</Button>
+        <Text>준비가 되셨다면 아래의 버튼을 클릭해 주세요!</Text>
+        <Button onClick={handleSetQuestions}>퀴즈 풀기</Button>
       </Wrapper>
     </>
   );
@@ -42,6 +48,7 @@ const Wrapper = styled.main`
 `;
 
 const Text = styled.p`
+  color: ${COLORS.BLACK};
   font-size: 25px;
 
   & + & {

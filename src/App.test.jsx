@@ -1,12 +1,9 @@
 import App from "./App";
-
-import {
-  fireEvent,
-  render,
-  waitFor,
-} from "@testing-library/react";
-
 import { MemoryRouter } from "react-router-dom";
+
+import { fireEvent, render, waitFor } from "@testing-library/react";
+
+import useSetQuestion from "./hooks/useSetQuestion";
 
 const mockNavigate = jest.fn();
 
@@ -17,7 +14,14 @@ jest.mock("react-router-dom", () => ({
   },
 }));
 
+jest.mock("./hooks/useSetQuestion");
+
 describe("App", () => {
+  useSetQuestion.mockImplementation(() => ({
+    isLoading: given.isLoading,
+    isSuccess: given.isSuccess,
+  }));
+
   const createApp = () =>
     render(
       <MemoryRouter>
@@ -33,9 +37,7 @@ describe("App", () => {
     ).toBeInTheDocument();
 
     expect(
-      getByText(
-        "준비가 되셨다면 아래의 버튼을 클릭해 주세요!"
-      )
+      getByText("준비가 되셨다면 아래의 버튼을 클릭해 주세요!")
     ).toBeInTheDocument();
   });
 
@@ -49,17 +51,59 @@ describe("App", () => {
     ).toBeInTheDocument();
   });
 
-  it("퀴즈 풀기 버튼을 클릭하면 '/question/1'로 이동합니다", async () => {
-    const { getByRole } = createApp();
+  context("isSuccess가 true인 경우", () => {
+    given("isSuccess", () => true);
 
-    const button = getByRole("button", {
-      name: "퀴즈 풀기",
+    it("퀴즈 풀기 버튼을 클릭하면 '/question/1'로 이동합니다", async () => {
+      const { getByRole } = createApp();
+
+      const button = getByRole("button", {
+        name: "퀴즈 풀기",
+      });
+
+      fireEvent.click(button);
+
+      await waitFor(() => {
+        expect(mockNavigate).toBeCalledWith("/question/1");
+      });
     });
+  });
 
-    fireEvent.click(button);
+  context("isSuccess가 false인 경우", () => {
+    given("isSuccess", () => false);
 
-    await waitFor(() => {
-      expect(mockNavigate).toBeCalledWith("/question/1");
+    it("퀴즈 풀기 버튼을 클릭하면 '/question/1'로 이동하지 않습니다", async () => {
+      const { getByRole } = createApp();
+
+      const button = getByRole("button", {
+        name: "퀴즈 풀기",
+      });
+
+      fireEvent.click(button);
+
+      await waitFor(() => {
+        expect(mockNavigate).not.toBeCalled();
+      });
+    });
+  });
+
+  context("isLoading이 true인 경우", () => {
+    given("isLoading", () => true);
+
+    it("로딩모달을 화면에 표시합니다", async () => {
+      const { queryByText } = createApp();
+
+      expect(queryByText("로딩모달")).toBeInTheDocument();
+    });
+  });
+
+  context("isLoading이 false인 경우", () => {
+    given("isLoading", () => false);
+
+    it("로딩모달을 화면에 표시하지 않습니다", async () => {
+      const { queryByText } = createApp();
+
+      expect(queryByText("로딩모달")).not.toBeInTheDocument();
     });
   });
 });
