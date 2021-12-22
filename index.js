@@ -1,5 +1,8 @@
 import reactDom from "react-dom";
 
-import App from "./src/App";
+import Router from "./src/Router";
 
-reactDom.render(<App />, document.querySelector("#root"));
+reactDom.render(
+  <Router />,
+  document.querySelector("#root")
+);
