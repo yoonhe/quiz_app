@@ -11,6 +11,7 @@ module.exports = {
   },
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -24,9 +25,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",
-      templateParameters: {
-        env: process.env.NODE_ENV === "development" ? "(개발용)" : "",
-      },
+      publicPath: "/",
     }),
   ],
   resolve: {
