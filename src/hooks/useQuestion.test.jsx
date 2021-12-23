@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react-hooks";
 
 import * as status from "../constants/status";
 
@@ -20,6 +20,23 @@ describe("useQuestion", () => {
       const { result } = renderHook(() => useQuestion({ id: 1 }));
 
       expect(result.current.question).toEqual(QUESTION);
+    });
+
+    it("handleChange 함수를 사용해 상태를 변경할 수 있습니다", () => {
+      const { result } = renderHook(() => useQuestion({ id: 1 }));
+
+      expect(result.current.question.checkedAnswer).toEqual(
+        QUESTION.checkedAnswer
+      );
+
+      act(() => {
+        result.current.handleChange({
+          ...QUESTION,
+          checkedAnswer: "선택한 정답",
+        });
+      });
+
+      expect(result.current.question.checkedAnswer).toBe("선택한 정답");
     });
   });
 
