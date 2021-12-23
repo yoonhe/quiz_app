@@ -39,8 +39,6 @@ describe("Question", () => {
   context("선택한 답안이 있는 경우", () => {
     given("question", () => ({
       ...QUESTION,
-      answers: ["사과", "딸기", "바나나", "포도"],
-      correctAnswer: "사과",
       checkedAnswer: "사과",
     }));
 
@@ -60,8 +58,6 @@ describe("Question", () => {
   context("선택한 답안이 없는 경우", () => {
     given("question", () => ({
       ...QUESTION,
-      answers: ["사과", "딸기", "바나나", "포도"],
-      correctAnswer: "사과",
       checkedAnswer: "",
     }));
 
@@ -76,8 +72,6 @@ describe("Question", () => {
 
       expect(handleChange).toBeCalledWith({
         ...QUESTION,
-        answers: ["사과", "딸기", "바나나", "포도"],
-        correctAnswer: "사과",
         checkedAnswer: "사과",
       });
     });
@@ -86,7 +80,6 @@ describe("Question", () => {
   context("선택한 답안이 정답인 경우", () => {
     given("question", () => ({
       ...QUESTION,
-      answers: ["사과", "딸기", "바나나", "포도"],
       correctAnswer: "사과",
       checkedAnswer: "사과",
     }));
@@ -101,7 +94,6 @@ describe("Question", () => {
   context("선택한 답안이 정답이 아닌 경우", () => {
     given("question", () => ({
       ...QUESTION,
-      answers: ["사과", "딸기", "바나나", "포도"],
       correctAnswer: "사과",
       checkedAnswer: "딸기",
     }));

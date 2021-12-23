@@ -1,9 +1,9 @@
 const QUESTION = {
   id: 1,
   title: "문항",
-  answers: ["답안1", "답안2", "답안3", "답안4"],
+  answers: ["사과", "딸기", "파인애플", "포도"],
+  correctedAnswer: "사과",
   checkedAnswer: "",
-  correctedAnswer: "답안2",
 };
 
 export default QUESTION;
