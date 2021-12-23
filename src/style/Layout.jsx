@@ -4,10 +4,10 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  margin: 0 auto;
   max-width: 500px;
   height: 100%;
-  margin: 0 auto;
+  align-items: center;
   text-align: center;
 `;
 

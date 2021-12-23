@@ -6,9 +6,9 @@ const Button = styled.button`
   margin-top: 50px;
   padding: 20px 50px;
   background: ${COLORS.GREEN};
+  border-radius: 50px;
   font-size: 20px;
   color: #fff;
-  border-radius: 50px;
   cursor: pointer;
 `;
 
