@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 
+import isNoneDate from "./utils/isNoneData";
+
 import * as Layout from "./style/Layout";
-import * as status from "./constants/status";
+import Button from "./style/button";
 
 import useQuestion from "./hooks/useQuestion";
-import Button from "./style/button";
 
 export default function Question() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ export default function Question() {
 
   return (
     <Layout.Wrapper>
-      {question === status.NONE_DATA && (
+      {isNoneDate(question) && (
         <>
           <h2>준비된 문제가 없습니다</h2>
           <Button to="/" as={Link}>
