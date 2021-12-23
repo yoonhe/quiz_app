@@ -12,12 +12,21 @@ import Button from "./style/button";
 
 import useQuestion from "./hooks/useQuestion";
 
+import Answer from "./Answer";
+
 const Question = () => {
   const { id } = useParams();
 
-  const { question } = useQuestion({ id });
+  const { question, handleChange } = useQuestion({ id });
 
   const { title, answers, checkedAnswer, correctAnswer } = question || {};
+
+  const handleClick = (answer) => {
+    handleChange({
+      ...question,
+      checkedAnswer: answer,
+    });
+  };
 
   return (
     <Layout.Wrapper>
@@ -31,21 +40,30 @@ const Question = () => {
       )}
       <Title>{title}</Title>
       <List>
-        {answers?.map((answer, index) => (
-          <Answer key={index}>
-            <button>{answer}</button>
-            {checkedCorrect.isCorrect({
-              answer,
-              checkedAnswer,
-              correctAnswer,
-            }) && <span>정답</span>}
-            {checkedCorrect.isIncorrect({
-              answer,
-              checkedAnswer,
-              correctAnswer,
-            }) && <span>오답</span>}
-          </Answer>
-        ))}
+        {answers?.map((answer, index) => {
+          const isCorrect = checkedCorrect.isCorrect({
+            answer,
+            checkedAnswer,
+            correctAnswer,
+          });
+
+          const isIncorrect = checkedCorrect.isIncorrect({
+            answer,
+            checkedAnswer,
+            correctAnswer,
+          });
+
+          return (
+            <Answer
+              key={index}
+              answer={answer}
+              isCorrect={isCorrect}
+              isIncorrect={isIncorrect}
+              checkedAnswer={checkedAnswer}
+              onClick={handleClick}
+            />
+          );
+        })}
       </List>
     </Layout.Wrapper>
   );
@@ -62,22 +80,6 @@ export const List = styled.ul`
 
   li + li {
     margin-top: 15px;
-  }
-`;
-
-export const Answer = styled.li`
-  button {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid ${COLORS.GRAY};
-    border-radius: 20px;
-    font-size: 15px;
-    color: ${COLORS.GRAY};
-
-    &:hover {
-      border-color: ${COLORS.GREEN};
-      color: ${COLORS.GREEN};
-    }
   }
 `;
 
