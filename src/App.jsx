@@ -2,16 +2,17 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "@emotion/styled";
-import { Global } from "@emotion/react";
-
-import globalStyle from "./style/globalStyle";
 
 import getQuestionPagePath from "./utils/getQuestionPagePath";
+
 import COLORS from "./constants/color";
 
-import useSetQuestion from "./hooks/useSetQuestion";
-
 import LoadingModal from "./LoadingModal";
+
+import * as Layout from "./style/Layout";
+import Button from "./style/button";
+
+import useSetQuestion from "./hooks/useSetQuestion";
 
 const App = () => {
   const navigate = useNavigate();
@@ -28,24 +29,15 @@ const App = () => {
 
   return (
     <>
-      <Global styles={globalStyle} />
       {isLoading && <LoadingModal />}
-      <Wrapper>
+      <Layout.Wrapper>
         <Text>지금부터 랜덤 퀴즈 풀이를 시작합니다</Text>
         <Text>준비가 되셨다면 아래의 버튼을 클릭해 주세요!</Text>
         <Button onClick={handleSetQuestions}>퀴즈 풀기</Button>
-      </Wrapper>
+      </Layout.Wrapper>
     </>
   );
 };
-
-const Wrapper = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
 
 const Text = styled.p`
   color: ${COLORS.BLACK};
@@ -54,16 +46,6 @@ const Text = styled.p`
   & + & {
     margin-top: 15px;
   }
-`;
-
-const Button = styled.button`
-  margin-top: 50px;
-  padding: 20px 50px;
-  background: ${COLORS.GREEN};
-  font-size: 20px;
-  color: #fff;
-  border-radius: 50px;
-  cursor: pointer;
 `;
 
 export default App;

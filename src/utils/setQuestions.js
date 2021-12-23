@@ -7,8 +7,9 @@ const setQuestions = async () => {
   const { results } = await callApi.get(url.QUESTIONS);
 
   const questions = results.map(
-    ({ question, incorrect_answers, correct_answer }) => ({
-      question,
+    ({ question: title, incorrect_answers, correct_answer }, index) => ({
+      id: index + 1,
+      title,
       answers: [...incorrect_answers, correct_answer],
       correct_answer,
       checked_answer: "",
