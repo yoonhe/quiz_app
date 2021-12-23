@@ -9,18 +9,20 @@ import QUESTION from "./fixtures/question";
 jest.mock("./hooks/useQuestion");
 
 describe("Question", () => {
+  const createQuestion = () => render(<Question />);
+
   useQuestion.mockImplementation(() => ({
-    question: given.question || QUESTION,
+    question: QUESTION,
   }));
 
   it("문항을 화면에 표시합니다", () => {
-    const { getByText } = render(<Question />);
+    const { getByText } = createQuestion();
 
     expect(getByText(QUESTION.title)).toBeInTheDocument();
   });
 
   it("답안을 화면에 표시합니다", () => {
-    const { getByRole } = render(<Question />);
+    const { getByRole } = createQuestion();
 
     QUESTION.answers.forEach((answer) => {
       expect(
