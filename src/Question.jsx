@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import isNoneDate from "./utils/isNoneData";
+import * as checkedCorrect from "./utils/checkCorrect";
 
 import COLORS from "./constants/color";
 
@@ -16,7 +17,7 @@ const Question = () => {
 
   const { question } = useQuestion({ id });
 
-  const { title, answers } = question || {};
+  const { title, answers, checkedAnswer, correctAnswer } = question || {};
 
   return (
     <Layout.Wrapper>
@@ -33,6 +34,16 @@ const Question = () => {
         {answers?.map((answer, index) => (
           <Answer key={index}>
             <button>{answer}</button>
+            {checkedCorrect.isCorrect({
+              answer,
+              checkedAnswer,
+              correctAnswer,
+            }) && <span>정답</span>}
+            {checkedCorrect.isIncorrect({
+              answer,
+              checkedAnswer,
+              correctAnswer,
+            }) && <span>오답</span>}
           </Answer>
         ))}
       </List>

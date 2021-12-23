@@ -11,8 +11,8 @@ const setQuestions = async () => {
       id: index + 1,
       title,
       answers: [...incorrect_answers, correct_answer],
-      correct_answer,
-      checked_answer: "",
+      correctAnswer: correct_answer,
+      checkedAnswer: "",
     })
   );
 
