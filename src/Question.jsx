@@ -1,13 +1,17 @@
 import { Link, useParams } from "react-router-dom";
 
+import styled from "@emotion/styled";
+
 import isNoneDate from "./utils/isNoneData";
+
+import COLORS from "./constants/color";
 
 import * as Layout from "./style/Layout";
 import Button from "./style/button";
 
 import useQuestion from "./hooks/useQuestion";
 
-export default function Question() {
+const Question = () => {
   const { id } = useParams();
 
   const { question } = useQuestion({ id });
@@ -24,14 +28,46 @@ export default function Question() {
           </Button>
         </>
       )}
-      <h2>{title}</h2>
-      <ul>
+      <Title>{title}</Title>
+      <List>
         {answers?.map((answer, index) => (
-          <li key={index}>
+          <Answer key={index}>
             <button>{answer}</button>
-          </li>
+          </Answer>
         ))}
-      </ul>
+      </List>
     </Layout.Wrapper>
   );
-}
+};
+
+export const Title = styled.h2`
+  margin-bottom: 30px;
+  font-size: 25px;
+  color: ${COLORS.BLACK};
+`;
+
+export const List = styled.ul`
+  width: 100%;
+
+  li + li {
+    margin-top: 15px;
+  }
+`;
+
+export const Answer = styled.li`
+  button {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid ${COLORS.GRAY};
+    border-radius: 20px;
+    font-size: 15px;
+    color: ${COLORS.GRAY};
+
+    &:hover {
+      border-color: ${COLORS.GREEN};
+      color: ${COLORS.GREEN};
+    }
+  }
+`;
+
+export default Question;

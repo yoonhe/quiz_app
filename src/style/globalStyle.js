@@ -19,6 +19,7 @@ const globalStyle = css`
     border: none;
     background: none;
     outline: none;
+    cursor: pointer;
   }
 
   a {
