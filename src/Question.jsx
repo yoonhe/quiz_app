@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import isNoneDate from "./utils/isNoneData";
-import * as checkedCorrect from "./utils/checkCorrect";
 
 import COLORS from "./constants/color";
 
@@ -12,7 +11,7 @@ import Button from "./style/button";
 
 import useQuestion from "./hooks/useQuestion";
 
-import Answer from "./Answer";
+import AnswerList from "./AnswerList";
 
 const Question = () => {
   const { id } = useParams();
@@ -21,7 +20,7 @@ const Question = () => {
 
   const { title, answers, checkedAnswer, correctAnswer } = question || {};
 
-  const handleClick = (answer) => {
+  const handleAnswerClick = (answer) => {
     handleChange({
       ...question,
       checkedAnswer: answer,
@@ -39,32 +38,12 @@ const Question = () => {
         </>
       )}
       <Title>{title}</Title>
-      <List>
-        {answers?.map((answer, index) => {
-          const isCorrect = checkedCorrect.isCorrect({
-            answer,
-            checkedAnswer,
-            correctAnswer,
-          });
-
-          const isIncorrect = checkedCorrect.isIncorrect({
-            answer,
-            checkedAnswer,
-            correctAnswer,
-          });
-
-          return (
-            <Answer
-              key={index}
-              answer={answer}
-              isCorrect={isCorrect}
-              isIncorrect={isIncorrect}
-              checkedAnswer={checkedAnswer}
-              onClick={handleClick}
-            />
-          );
-        })}
-      </List>
+      <AnswerList
+        answers={answers}
+        checkedAnswer={checkedAnswer}
+        correctAnswer={correctAnswer}
+        handleClick={handleAnswerClick}
+      />
     </Layout.Wrapper>
   );
 };
@@ -73,14 +52,6 @@ export const Title = styled.h2`
   margin-bottom: 30px;
   font-size: 25px;
   color: ${COLORS.BLACK};
-`;
-
-export const List = styled.ul`
-  width: 100%;
-
-  li + li {
-    margin-top: 15px;
-  }
 `;
 
 export default Question;
