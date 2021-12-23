@@ -1,10 +1,12 @@
 import { renderHook } from "@testing-library/react-hooks";
+
+import * as status from "../constants/status";
+
 import QUESTION from "../fixtures/question";
-import getQuestion from "../utils/getQuestion";
 
 import useQuestion from "./useQuestion";
 
-import * as status from "../constants/status";
+import getQuestion from "../utils/getQuestion";
 
 jest.mock("../utils/getQuestion");
 

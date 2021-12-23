@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import getQuestionPagePath from "./utils/getQuestionPagePath";
+
 import COLORS from "./constants/color";
-import useSetQuestion from "./hooks/useSetQuestion";
 
 import LoadingModal from "./LoadingModal";
 
 import * as Layout from "./style/Layout";
 import Button from "./style/button";
+
+import useSetQuestion from "./hooks/useSetQuestion";
 
 const App = () => {
   const navigate = useNavigate();
