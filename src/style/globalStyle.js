@@ -20,6 +20,14 @@ const globalStyle = css`
     background: none;
     outline: none;
   }
+
+  a {
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+  }
 `;
 
 export default globalStyle;
