@@ -1,10 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import styled from "@emotion/styled";
 
 import isNoneDate from "./utils/isNoneData";
 
 import COLORS from "./constants/color";
+import * as path from "./constants/path";
 
 import * as Layout from "./style/Layout";
 import Button from "./style/button";
@@ -14,17 +15,30 @@ import useQuestion from "./hooks/useQuestion";
 import AnswerList from "./AnswerList";
 
 const Question = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const { question, handleChange } = useQuestion({ id });
 
-  const { title, answers, checkedAnswer, correctAnswer } = question || {};
+  const {
+    id: questionId,
+    title,
+    answers,
+    checkedAnswer,
+    correctAnswer,
+  } = question || {};
 
   const handleAnswerClick = (answer) => {
     handleChange({
       ...question,
       checkedAnswer: answer,
     });
+  };
+
+  const handleNextClick = () => {
+    const nextPage = questionId + 1;
+
+    navigate(`${path.QUESTION}/${nextPage}`);
   };
 
   return (
@@ -44,6 +58,7 @@ const Question = () => {
         correctAnswer={correctAnswer}
         handleClick={handleAnswerClick}
       />
+      {checkedAnswer && <Button onClick={handleNextClick}>다음 문항</Button>}
     </Layout.Wrapper>
   );
 };
