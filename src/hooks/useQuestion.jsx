@@ -19,13 +19,9 @@ const useQuestion = ({ id }) => {
   const setStorage = () => {
     const storageData = storage.getItem(localStorageKey.QUESTIONS);
 
-    const newQuestions = storageData.questions.map((storageQuestion) => {
-      if (Number(id) === storageQuestion.id) {
-        return question;
-      }
-
-      return storageQuestion;
-    });
+    const newQuestions = storageData.questions.map((storageQuestion) =>
+      Number(id) === storageQuestion.id ? question : storageQuestion
+    );
 
     storage.updateItem({
       key: localStorageKey.QUESTIONS,
