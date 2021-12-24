@@ -42,7 +42,7 @@ const useQuestion = ({ id }) => {
     }
 
     setStorage();
-  }, [checkedAnswer]);
+  }, [checkedAnswer, id, question]);
 
   return {
     question,
