@@ -6,7 +6,18 @@ import useQuestion from "./hooks/useQuestion";
 
 import QUESTION from "./fixtures/question";
 
+import * as path from "./constants/path";
+
+const mockNavigate = jest.fn();
+
 jest.mock("./hooks/useQuestion");
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate() {
+    return mockNavigate;
+  },
+}));
 
 describe("Question", () => {
   const handleChange = jest.fn();
@@ -62,6 +73,20 @@ describe("Question", () => {
           name: "다음 문항",
         })
       ).toBeInTheDocument();
+    });
+
+    it("'다음 문항' 버튼을 클릭하면 다음 페이지로 이동합니다", () => {
+      const nextPage = QUESTION.id + 1;
+
+      const { getByRole } = createQuestion();
+
+      fireEvent.click(
+        getByRole("button", {
+          name: "다음 문항",
+        })
+      );
+
+      expect(mockNavigate).toBeCalledWith(`${path.QUESTION}/${nextPage}`);
     });
   });
 

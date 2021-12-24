@@ -1,7 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
 
-import QUESTION from "./fixtures/question";
-
 import Answer from "./Answer";
 
 describe("Answer", () => {
