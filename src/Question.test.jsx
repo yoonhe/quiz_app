@@ -53,6 +53,16 @@ describe("Question", () => {
 
       expect(handleChange).toBeCalledTimes(0);
     });
+
+    it("'다음 문항' 버튼이 표시됩니다", () => {
+      const { getByRole } = createQuestion();
+
+      expect(
+        getByRole("button", {
+          name: "다음 문항",
+        })
+      ).toBeInTheDocument();
+    });
   });
 
   context("선택한 답안이 없는 경우", () => {
@@ -74,6 +84,16 @@ describe("Question", () => {
         ...QUESTION,
         checkedAnswer: "사과",
       });
+    });
+
+    it("'다음 문항' 버튼이 표시되지 않습니다", () => {
+      const { queryByRole } = createQuestion();
+
+      expect(
+        queryByRole("button", {
+          name: "다음 문항",
+        })
+      ).not.toBeInTheDocument();
     });
   });
 

@@ -44,6 +44,7 @@ const Question = () => {
         correctAnswer={correctAnswer}
         handleClick={handleAnswerClick}
       />
+      {checkedAnswer && <Button>다음 문항</Button>}
     </Layout.Wrapper>
   );
 };
