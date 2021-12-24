@@ -10,6 +10,9 @@
 - react
 - emotion
 
+## 디자인
+https://www.figma.com/file/BISPKpSFP6KKk6bSt8U4yN/Untitled
+
 ## 실행 방법
 
 1. 패키지 설치
