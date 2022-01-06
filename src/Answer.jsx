@@ -4,7 +4,13 @@ import COLORS from "./constants/color";
 
 import getAnswerColor from "./utils/getAnswerColor";
 
-const Answer = ({ answer, isCorrect, isIncorrect, checkedAnswer, onClick }) => {
+const Answer = ({
+  answer,
+  isCorrect,
+  isIncorrect,
+  checkedAnswer,
+  onClick,
+}) => {
   const handleClick = (answer) => {
     if (checkedAnswer) {
       return;
@@ -14,20 +20,27 @@ const Answer = ({ answer, isCorrect, isIncorrect, checkedAnswer, onClick }) => {
   };
 
   return (
-    <Wrap
-      onClick={() => handleClick(answer)}
-      isCorrect={isCorrect}
-      isIncorrect={isIncorrect}
-    >
-      <button disabled={checkedAnswer}>{answer}</button>
+    <Wrap isCorrect={isCorrect} isIncorrect={isIncorrect}>
+      <button
+        disabled={checkedAnswer}
+        onClick={() => handleClick(answer)}
+      >
+        {answer}
+      </button>
       {isCorrect && (
-        <Mark isCorrect={isCorrect} isIncorrect={isIncorrect}>
+        <Mark
+          isCorrect={isCorrect}
+          isIncorrect={isIncorrect}
+        >
           정답
         </Mark>
       )}
 
       {isIncorrect && (
-        <Mark isCorrect={isCorrect} isIncorrect={isIncorrect}>
+        <Mark
+          isCorrect={isCorrect}
+          isIncorrect={isIncorrect}
+        >
           오답
         </Mark>
       )}
